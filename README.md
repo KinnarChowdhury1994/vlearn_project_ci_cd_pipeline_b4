@@ -18,10 +18,16 @@ Make a new commit to the GitHub repository and check that the changes are automa
 """
 ```
 
-###### ANSWER
+###### Solution
 
 Task 1:
     Added the simple HTML code in index.html
 
 Task 2:
-    Please refer document kinnar_devops_b4_deployment.docx
+    Please refer document [kinnar_devops_b4_deployment.doc](https://docs.google.com/document/d/1o1l_LWqtSomgvfXsTkrkeFvEWWIt9HMZN48bqvCDj_c/edit?usp=sharing)
+
+Task 3:
+
+    ```
+    
+    ```
