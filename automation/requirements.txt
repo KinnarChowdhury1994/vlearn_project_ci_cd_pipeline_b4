@@ -1,4 +1,4 @@
-GitPython
-requests
-python-dotenv
+#GitPython
+# requests
 # httplib2==0.22.0
+python-dotenv
