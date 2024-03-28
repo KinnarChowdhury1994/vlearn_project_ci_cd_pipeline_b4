@@ -17,32 +17,38 @@
 #     print(f"Latest Commit Hash: {latest_commit_hash}")
 
 
-import os
-import requests
-# import git
-import subprocess
-import logging
-from dotenv import load_dotenv
-from logging.handlers import RotatingFileHandler
 from datetime import datetime,timedelta
-from constants import GITHUB_API_DOMAIN,REPOSITORY
+import logging
+from logging.handlers import RotatingFileHandler
+import os
+from dotenv import load_dotenv
+from constants import GITHUB_API,REPOSITORY,UTF8
+import http.client
+import json
 
 class Automation:
     def __init__(self):
         """_Python script to check for new commits using the GitHub API._
         """
         print("Hello, Thank You for viewing my code.")
-        if self.datetimeUtil():
-            load_dotenv()
-            self.env = os.getenv
-            self.log = self.setupLogger(name=self.env('LOGGER'),log_file=self.env('LOG_FILE'),level=self.env('LEVEL'))
-            self.ManageCredentials()
-            self.getAllCommits()
+        try:
+            if self.datetimeUtil():
+                self.ManageCredentials()
+                self.retrieve_latest_commit_date_for_github_repository(in_username=str(self.owner),in_repository_name=str(REPOSITORY))
+            else:
+                raise Exception('Error Occured')
+        except Exception as e:
+            print(e)
+        finally:
+            print('Execution Completed')
     
     def datetimeUtil(self):
-        self.localNow = datetime.utcnow() + timedelta(hours=5,minutes=30)
-        self.localnow = self.localNow.strftime("%H:%M:%S.%f - %D %M,%Y")
-        print(f"Current Time - {self.localnow}")
+        localNow = datetime.utcnow() + timedelta(hours=5,minutes=30)
+        localnow = localNow.strftime("%H:%M:%S.%f - %D %M,%Y")
+        load_dotenv()
+        self.env = os.getenv
+        self.log = self.setupLogger(name=self.env('LOGGER'),log_file=self.env('LOG_FILE'),level=self.env('LEVEL'))
+        self.log.info(f"[Inside - datetimeUtil function] Current Time - {localnow}")
         return True
     
     def setupLogger(self,name, log_file,level):
@@ -60,70 +66,49 @@ class Automation:
         # setup owner name , access_token, and headers
         self.owner = str(os.getenv('OWNER'))
         self.access_token = str(os.getenv('ACCESS_TOKEN'))
-        # self.headers = {'Authorization':"Token "+self.access_token}
-        self.headers = {
-            "Accept": "application/vnd.github+json",
-            "Authorization": f"Bearer {self.access_token}",
-            "X-GitHub-Api-Version": "2022-11-28"
-        }
-        return True
-    
-    # def getAllCommits(self):
-    #     remote_url = str(GITHUB_API_DOMAIN + f"/repos/{self.owner}/{REPOSITORY}/commits")
-    #     self.log.info(f'Remote URL -> {remote_url} | Owner -> {self.owner}')
-    #     curl_command = [
-    #         "curl",
-    #         "-L",
-    #         "-H", "Accept: application/vnd.github+json",
-    #         "-H", f"Authorization: Token {self.access_token}",
-    #         "-H", "X-GitHub-Api-Version: 2022-11-28",
-    #         f"{remote_url}"
-    #     ]
-    #     curl_command = [
-    #         "curl", 
-    #         "--request GET "
-    #         "--url 'https://api.github.com/octocat'"
-    #         "--header "Authorization: Bearer YOUR-TOKEN"
-    #         --header "X-GitHub-Api-Version: 2022-11-28"
-    #     ]
-    #     # Execute the cURL command
-    #     try:
-    #         output = subprocess.check_output(curl_command, stderr=subprocess.STDOUT)
-    #         self.log.warning(output.decode('utf-8'))
-    #     except subprocess.CalledProcessError as e:
-    #         self.log.error(f"Error executing cURL command: {e}")
-    #         self.log.error(f"Output: {e.output.decode('utf-8')}")
-    
-    # def getAllCommits(self):
-    #     remote_url = str(GITHUB_API_DOMAIN + f"/repos/{self.owner}/{REPOSITORY}/commits")
-    #     self.log.info(f'Remote URL -> {remote_url}')
-    #     response = requests.get(remote_url, headers=self.headers)
-    #     self.log.warning(response.json())
-    #     # if response.status_code == 200:
-    #     return response.json()
-    
-    
-    # def getInfo(self):
-    #     """_Citation:- https://melaniesoek0120.medium.com/how-to-use-github-api-to-extract-data-with-python-bdc61106a501
-    #     """
-    #     self.repoInformation()
-    #     for page in self.repos:
-    #         if page==[]:
-    #             print(self.repos.index(page))
-    #             break
+        self.headers = {'Authorization':"Bearer " + self.access_token}
+
+    def retrieve_latest_commit_date_for_github_repository(self,in_username, in_repository_name):
+        """Retrieves the date of the last commit for the master branch of the user's GitHub repository.
+
+        :param in_username: Name of user which repository to get last commit for.
+        :param in_repository_name Name of user's repository for which to get last commit for.
+        :return: String containing date of last commit, or None if GitHub request failed.
+        """
+        https_conn = http.client.HTTPSConnection(f'{GITHUB_API}')
+        repository_last_commit_date = None
+        http_request_headers = {"Accept": "application/vnd.github.v3+json", "User-Agent": self.owner}
+
+        try:
+            # Request only the one last commit for the supplied user's repository with supplied name.
+            self.log.info('Inside retrieve_latest_commit_date_for_github_repository function')
+            github_request_path = "/repos/" + in_username + "/" + in_repository_name + "/commits?page=1&per_page=1"
+            self.log.warning(f'github_request_path -> {github_request_path}')
             
-    # def repoInformation(self):
-    #     """_Loop through all pages to obtain all the repos' information
-    #     """
-    #     self.repos=[]
-    #     for page_num in range(1,300):
-    #         try:
-    #         # to find all the repos' names from each page
-    #             url=f"https://api.github.com/users/{self.owner}/repos?page={page_num}" 
-    #             repo=requests.get(url,headers=self.headers).json()
-    #             self.repos.append(repo)
-    #         except:
-    #             self.repos.append(None)
+            https_conn.request(url=github_request_path,method='GET',headers=http_request_headers)
+            git_api_resp = https_conn.getresponse()
+            resp_data = git_api_resp.read().decode(f'{UTF8}')
+            self.log.warning(f'Status :: {git_api_resp.status} | Github API Response ->\n{resp_data}')
+            
+            if git_api_resp.status == 200:
+                # Response was successful, now read and parse the JSON data.
+                api_resp_text = resp_data
+                # self.log.warning(f'api_resp_text\n{api_resp_text}')
+                
+                api_resp_object = json.loads(api_resp_text)
+                # self.log.warning(f'api_resp_object\n{api_resp_object}')
+                
+                last_commit_ref = api_resp_object[0]['sha']
+                last_commit_msg = api_resp_object[0]['commit']['message']
+                committed_by = api_resp_object[0]['commit']['committer']['name']
+                repo_last_commit_date = api_resp_object[0]['commit']['author']['date']
+                self.log.warning(f'repository_last_commit_date -> {repository_last_commit_date}')
+                self.log.warning(f'Reference {last_commit_ref} [{last_commit_ref[0:7]}] | Last Commit Message -> {last_commit_msg} | By {committed_by} on {repo_last_commit_date}')
+            else:
+                message = f"ERROR: Request to GitHub failed with status {git_api_resp.status} and the reason was {git_api_resp.reason}"
+                self.log.error(f'Message -> {message}')
+        finally:
+            https_conn.close()
 
 def main():
     clsUnit = Automation()

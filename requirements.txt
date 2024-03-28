@@ -1,3 +1,4 @@
 GitPython
 requests
 python-dotenv
+# httplib2==0.22.0
