@@ -46,7 +46,7 @@ class Automation:
                     subprocess.Popen('cd /home/kinnar/deployment/automation"', shell=True)
                     subprocess.Popen('pwd', shell=True)
                     subprocess.Popen('ls -l', shell=True)
-                    subprocess.Popen('./_deploy.sh', shell=True)
+                    subprocess.Popen('sh _deploy.sh', shell=True)
                     self.log.warning('Deployment Script Triggered Successfully')
                     
                 else:
