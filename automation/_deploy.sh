@@ -19,8 +19,8 @@ ls -la
 git checkout main
 ls -la
 
-rm -rf /var/www/html/index.html
-cp -r index.html /var/www/html/
+sudo rm -rf /var/www/html/index.html
+sudo cp -r index.html /var/www/html/
 
 sudo systemctl restart nginx
 
