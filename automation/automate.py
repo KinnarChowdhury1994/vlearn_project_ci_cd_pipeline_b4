@@ -40,14 +40,15 @@ class Automation:
                 
                 if gitResp:
                     self.log.warning('Processing for Deployment')
-                    subprocess.Popen('echo "Testing in Server Console"', shell=True)
+                    self.log.warning('Deployment Script Triggered Successfully')
+                    subprocess.Popen('echo "Testing in Server Console using python."', shell=True)
                     subprocess.Popen('pwd', shell=True)
                     subprocess.Popen('ls -la', shell=True)
-                    subprocess.Popen('cd /home/kinnar/deployment/automation"', shell=True)
+                    subprocess.Popen('cd /home/kinnar/deployment/automation', shell=True)
                     subprocess.Popen('pwd', shell=True)
                     subprocess.Popen('ls -l', shell=True)
                     subprocess.Popen('sh _deploy.sh', shell=True)
-                    self.log.warning('Deployment Script Triggered Successfully')
+                    self.log.warning('Deployment Script Execution Completed Successfully')
                     
                 else:
                     self.log.warning('No Deployment')

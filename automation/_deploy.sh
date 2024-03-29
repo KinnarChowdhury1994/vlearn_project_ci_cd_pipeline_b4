@@ -2,7 +2,10 @@
 
 cd /home/kinnar/deployment/repo/
 ls
+
 LOCATION="vlearn_project_ci_cd_pipeline_b4"
+REPOSITORY="https://github.com/KinnarChowdhury1994/vlearn_project_ci_cd_pipeline_b4.git"
+
 if [ -d $LOCATION ]
 then
     echo "File LOCATION already exists"
@@ -10,7 +13,7 @@ then
     git pull
 else
     echo "Creating FOLDER........"
-    git clone https://github.com/KinnarChowdhury1994/vlearn_project_ci_cd_pipeline_b4.git
+    git clone $REPOSITORY
     cd $LOCATION
     ls -la
 fi
