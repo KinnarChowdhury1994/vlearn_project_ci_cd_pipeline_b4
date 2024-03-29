@@ -22,7 +22,7 @@ import logging
 from logging.handlers import RotatingFileHandler
 import os
 from dotenv import load_dotenv
-from constants import GITHUB_API,REPOSITORY,UTF8
+from automation.constants import GITHUB_API,REPOSITORY,UTF8
 import http.client
 import json
 import subprocess
