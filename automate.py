@@ -36,7 +36,7 @@ class Automation:
             if self.datetimeUtil():
                 self.ManageCredentials()
                 gitResp = self.retrieve_latest_commit_date_for_github_repository(in_repository_name=str(REPOSITORY))
-                self.log.warning(gitResp)
+                self.log.warning(f'gitResp from retrieve_latest_commit_date_for_github_repository = {gitResp}')
                 if gitResp:
                     self.log.warning('Processing for Deployment')
                     self.log.warning('Deployment Script Triggered Successfully')
