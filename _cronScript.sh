@@ -13,8 +13,8 @@ cd $HOME/repo/$REPO/
 ls -la
 pip3 install -r requirements.txt
 pip3 list
-sudo chmod +x $HOME/repo/$REPO/automate.py
-sudo chmod +x $HOME/repo/$REPO/_deploy.sh
+sudo -S kinnar chmod +x $HOME/repo/$REPO/automate.py
+sudo -S kinnar chmod +x $HOME/repo/$REPO/_deploy.sh
 
 echo "Executing automate.py from Shell"
 python3 $HOME/repo/$REPO/automate.py
