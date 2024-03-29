@@ -1,0 +1,7 @@
+Course 5: SDLC Project: CI-CD Pipeline | DevOps B4
+
+Assessment Graded Project on Building CI-CD Pipeline Tool
+
+Repository Link: https://github.com/KinnarChowdhury1994/vlearn_project_ci_cd_pipeline_b4
+
+Submitted By:- Kinnar Chowdhury, DevOps, Batch 4.
