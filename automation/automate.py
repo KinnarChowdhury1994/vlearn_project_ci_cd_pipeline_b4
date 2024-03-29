@@ -81,7 +81,7 @@ class Automation:
         # setup owner name , access_token, and headers
         self.owner = str(os.getenv('OWNER'))
         self.access_token = str(os.getenv('ACCESS_TOKEN'))
-        self.headers = {'Authorization':"Bearer " + self.access_token}
+        self.headers = {'Authorization':f"Bearer {self.access_token}"}
 
     def retrieve_latest_commit_date_for_github_repository(self, in_repository_name):
         """Retrieves the date of the last commit for the master branch of the user's GitHub repository.
