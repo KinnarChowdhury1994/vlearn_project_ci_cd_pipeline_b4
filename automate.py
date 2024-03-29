@@ -147,7 +147,7 @@ class Automation:
                 
                 self.log.info(f'Interval of Current Time & Last Commit Time :: {interval} Timedelta [ H :: {hours} | M :: {minutes} | S :: {seconds}]')
                 
-                if (minutes > 0.0 and minutes < 5.0):
+                if minutes < 5.0:
                     self.log.info('New Commit Found')
                     latest_push = True
                 else:
