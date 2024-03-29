@@ -9,8 +9,8 @@ if [ -d $LOCATION ]
 then
     echo "File LOCATION already exists"
     cd $LOCATION
-    sudo -S kinnar chmod -x /home/kinnar/deployment/repo/$LOCATION/automate.py
-    sudo -S kinnar chmod -x /home/kinnar/deployment/repo/$LOCATION/_deploy.sh
+    sudo chmod -x /home/kinnar/deployment/repo/$LOCATION/automate.py
+    sudo chmod -x /home/kinnar/deployment/repo/$LOCATION/_deploy.sh
     git pull
 else
     echo "Creating FOLDER........"
@@ -23,9 +23,9 @@ ls -la
 git checkout main
 ls -la
 
-sudo -S kinnar rm -rf /var/www/html/index.html
-sudo -S kinnar cp -r index.html /var/www/html/
+sudo rm -rf /var/www/html/index.html
+sudo cp -r index.html /var/www/html/
 
-sudo -S kinnar systemctl restart nginx
+sudo systemctl restart nginx
 
 echo "Thank You Deployment Completed"
