@@ -23,7 +23,9 @@ crontab -l
 #
 # m h  dom mon dow   command
 
-*/2 * * * *     /home/kinnar/deployment/cronjob/_cronScript.sh >> /home/kinnar/deployment/cronjob/log/success.log 2> /home/kinnar/deployment/cronjob/log/error.log >> /home/kinnar/deployment/cronjob/log/debug.log && sudo cp -r  /home/kinnar/deployment/cronjob/log/debug.log debug.txt
+# */2 * * * *     /home/kinnar/deployment/cronjob/_cronScript.sh >> /home/kinnar/deployment/cronjob/log/success.log 2> /home/kinnar/deployment/cronjob/log/error.log >> /home/kinnar/deployment/cronjob/log/debug.log && sudo cp -r  /home/kinnar/deployment/cronjob/log/debug.log debug.txt
+
+*/2 * * * *     /home/kinnar/deployment/cronjob/_cronScript.sh >> /home/kinnar/deployment/cronjob/log/success.log 2> /home/kinnar/deployment/cronjob/log/error.log
 
 ubuntu@ip-172-31-36-196:~/cronjobs/log$ pwd
 /home/kinnar/deployment/cronjob/log
