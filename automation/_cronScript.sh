@@ -2,8 +2,12 @@
 REPO="vlearn_project_ci_cd_pipeline_b4"
 cd /home/kinnar/deployment/
 ls -la
-cd .venv/bin && source activate
-cd ../.. && pwd && ls
+cd .venv/bin
+pwd
+source activate
+cd ../..
+pwd
+ls
 cd repo/automation/$REPO
 ls 
 pip3 install -r requirements.txt
