@@ -1,3 +1,6 @@
 kinnar_devops_b4_deployment.pdf filter=lfs diff=lfs merge=lfs -text
 kinnar_devops_b4_deployment.odt filter=lfs diff=lfs merge=lfs -text
 kinnar_devops_b4_deployment.docx filter=lfs diff=lfs merge=lfs -text
+Documents/kinnar_devops_b4_deployment.docx filter=lfs diff=lfs merge=lfs -text
+Documents/kinnar_devops_b4_deployment.pdf filter=lfs diff=lfs merge=lfs -text
+Documents/kinnar_devops_b4_deployment.odt filter=lfs diff=lfs merge=lfs -text
