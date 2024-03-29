@@ -172,7 +172,6 @@ def main():
         clsUnit.log.exception(e)
     finally:
         return 200,"SUCCESS"
-    
-    
+
 if __name__ == "__main__":
     main()
