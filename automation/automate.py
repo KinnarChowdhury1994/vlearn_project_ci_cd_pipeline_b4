@@ -43,7 +43,7 @@ class Automation:
                     subprocess.Popen('echo "Testing in Server Console using python."', shell=True)
                     subprocess.Popen('pwd', shell=True)
                     subprocess.Popen('ls -la', shell=True)
-                    subprocess.Popen('cd /home/kinnar/deployment/automation', shell=True)
+                    subprocess.Popen('cd /home/kinnar/deployment/repo/vlearn_project_ci_cd_pipeline_b4/', shell=True)
                     subprocess.Popen('pwd', shell=True)
                     subprocess.Popen('ls -l', shell=True)
                     subprocess.Popen('sh _deploy.sh', shell=True)
