@@ -37,7 +37,6 @@ class Automation:
                 self.ManageCredentials()
                 gitResp = self.retrieve_latest_commit_date_for_github_repository(in_repository_name=str(REPOSITORY))
                 self.log.warning(gitResp)
-                
                 if gitResp:
                     self.log.warning('Processing for Deployment')
                     self.log.warning('Deployment Script Triggered Successfully')
@@ -49,10 +48,8 @@ class Automation:
                     subprocess.Popen('ls -l', shell=True)
                     subprocess.Popen('sh _deploy.sh', shell=True)
                     self.log.warning('Deployment Script Execution Completed Successfully')
-                    
                 else:
                     self.log.warning('No Deployment')
-                
             else:
                 raise Exception('Error Occured')
         except Exception as e:
@@ -150,7 +147,7 @@ class Automation:
                 
                 self.log.info(f'Interval of Current Time & Last Commit Time :: {interval} Timedelta [ H :: {hours} | M :: {minutes} | S :: {seconds}]')
                 
-                if ((minutes > 0.0 and minutes < 5.0) and (hours == 0.0)):
+                if (minutes > 0.0 and minutes < 5.0):
                     self.log.info('New Commit Found')
                     latest_push = True
                 else:
