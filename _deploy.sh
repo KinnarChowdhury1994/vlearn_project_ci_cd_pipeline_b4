@@ -10,8 +10,8 @@ if [ -d $LOCATION ]
 then
     echo "File LOCATION already exists"
     cd $LOCATION
-    sudo chmod -x /home/kinnar/deployment/repo/$LOCATION/automation/automate.py
-    sudo chmod -x /home/kinnar/deployment/repo/$LOCATION/automation/_deploy.sh
+    sudo chmod -x /home/kinnar/deployment/repo/$LOCATION/automate.py
+    sudo chmod -x /home/kinnar/deployment/repo/$LOCATION/_deploy.sh
     git pull
 else
     echo "Creating FOLDER........"
