@@ -1,5 +1,4 @@
 #! /bin/bash
-
 cd /home/kinnar/deployment/repo/
 ls
 
